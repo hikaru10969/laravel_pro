@@ -1,7 +1,7 @@
-@extends('layout')
+@extends('layouts.layout')
 
 @section('content')
-    <h1>社員一覧</h1>
+    <h1 >社員一覧</h1>
     <table class='table table-striped table-hover'>
         <thead>
             <tr>

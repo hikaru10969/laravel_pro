@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect('/staff');
+    return redirect('/login');
 });
 
 Route::get('/staffs','App\Http\Controllers\StaffsController@index')->name('staff.list'); // 社員一覧画面
@@ -30,3 +30,4 @@ Route::delete('/staff/{id}','App\Http\Controllers\StaffsController@destroy')->na
 
 Route::get('/result','App\Http\Controllers\StaffsController@result')->name('staff.result'); // 結果画面
 Route::get('/error','App\Http\Controllers\StaffsController@error')->name('staff.error'); // エラー画面
+Auth::routes();
