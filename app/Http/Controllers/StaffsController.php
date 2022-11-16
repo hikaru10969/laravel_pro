@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Staffs;
+use App\Models\FileUpload;
 use Illuminate\Http\Request;
 use App\Libs\StaffsUtil;
 use Illuminate\Validation\Rule;
@@ -112,7 +113,9 @@ class StaffsController extends Controller
         // 新卒中途設定
         $staff_paramertar->new_glad = StaffsUtil::glad_flg((int)$staff_paramertar->new_glad_flg);
 
-        return view('show',  ['staff_paramertar' => $staff_paramertar]);
+        $file_upload = FileUpload::where('staff_id',$id)->where('delete_flg', 0)->orderBy('display_num','asc')->get();
+
+        return view('show',  ['staff_paramertar' => $staff_paramertar, 'files' => $file_upload]);
     }
 
     /**

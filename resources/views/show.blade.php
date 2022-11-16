@@ -36,6 +36,32 @@
                     <td class="text-center">案件</td>
                     <td class="text-center">{!! nl2br($staff_paramertar->project_type) !!}</td>
                 </tr>
+                <tr>
+                    <td class="text-center">ファイル</td>
+                    <td class="text-center">
+                        @foreach($files as $file)
+                            {{ Form::open(['method' => 'delete', 'route' => ['upload.destroy', ['staffId' => $file->staff_id, 'fileUploadId' => $file->id]]]) }}
+                                <p>
+                                    <a href="{{ route('upload.index',['fileUploadId' => $file->id]) }}" class="">{{$file->file_name}}</a>
+                                    {{ Form::submit('削除',['class'=> 'btn btn-primary mr-3']) }}
+                                </p>
+                            {{ Form::close() }}
+                        @endforeach
+                        @if (count($files) < 3)
+                            {{ Form::open(['method' => 'post', 'route' => ['upload.store', $staff_paramertar->id],'files' => true]) }}
+                                <p>
+                                    <input type="file" id="file" name="upload_file" class="form-control">
+                                    {{ Form::submit('アップロード',['class'=> 'btn btn-primary mr-3']) }}
+                                </p>
+                            {{ Form::close() }}
+                        @endif
+                        @if($errors->has('upload_file'))
+                            <div class="alert alert-danger">
+                                <li>{{ $errors->first('upload_file') }}</li>
+                            </div>
+                        @endif 
+                    </td>
+                </tr>
         </tbody>
     </table>
     <div class="text-center">

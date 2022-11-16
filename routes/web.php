@@ -26,7 +26,11 @@ Route::post('/staff/new','App\Http\Controllers\StaffsController@store')->name('s
 Route::get('/staff/edit/{id}','App\Http\Controllers\StaffsController@edit')->name('staff.edit'); // 更新画面
 Route::post('/staff/update/{id}','App\Http\Controllers\StaffsController@update')->name('staff.update'); // 更新処理
 
-Route::delete('/staff/{id}','App\Http\Controllers\StaffsController@destroy')->name('staff.destroy'); // 削除画面
+Route::post('/upload/{id}','App\Http\Controllers\FileUploadController@store')->name('upload.store'); // ファイルアップロード処理
+Route::get('/upload/{fileUploadId}','App\Http\Controllers\FileUploadController@index')->name('upload.index'); // ファイルダウンロード処理
+
+Route::delete('/staff/{id}','App\Http\Controllers\StaffsController@destroy')->name('staff.destroy'); // ユーザー削除処理
+Route::delete('/upload/{staffId}/{fileUploadId}','App\Http\Controllers\FileUploadController@destroy')->name('upload.destroy'); // ファイル削除処理
 
 Route::get('/result','App\Http\Controllers\StaffsController@result')->name('staff.result'); // 結果画面
 Route::get('/error','App\Http\Controllers\StaffsController@error')->name('staff.error'); // エラー画面
